@@ -2,8 +2,11 @@ services:
   app:
     build: .
     container_name: python-app
+    environment:
+      - AzureWebJobsScriptRoot=/home/site/wwwroot
+      - AzureFunctionsJobHost__Logging__Console__IsEnabled=true
     command: uvicorn src.main:app --host 0.0.0.0 --port 5000 --reload
     ports:
       - 80:5000
     volumes:
-      - .:/code
+      - .:/home/site/wwwroot
